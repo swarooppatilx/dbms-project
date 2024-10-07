@@ -1,5 +1,6 @@
 <?php include('db.php'); 
 
+// SQL query to fetch orders, user names, and restaurant names
 $sql = "
     SELECT Orders.order_id, Orders.order_total, Orders.delivery_status, Users.name AS user_name, Restaurants.name AS restaurant_name 
     FROM Orders
@@ -11,13 +12,7 @@ $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <div class="container mt-5">
@@ -33,6 +28,7 @@ $result = $conn->query($sql);
                     <th>Restaurant Name</th>
                     <th>Order Total</th>
                     <th>Delivery Status</th>
+                    <th>Actions</th> <!-- New Actions column for Edit and Delete buttons -->
                   </tr>
                 </thead>
                 <tbody>";
@@ -40,11 +36,15 @@ $result = $conn->query($sql);
         // Output data for each order
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
-                    <td>" . $row['order_id'] . "</td>
+                    <td>" . htmlspecialchars($row['order_id']) . "</td>
                     <td>" . htmlspecialchars($row['user_name']) . "</td>
                     <td>" . htmlspecialchars($row['restaurant_name']) . "</td>
                     <td>" . number_format($row['order_total'], 2) . "</td>
                     <td>" . htmlspecialchars($row['delivery_status']) . "</td>
+                    <td>
+                        <a href='edit_order.php?id=" . htmlspecialchars($row['order_id']) . "' class='btn btn-primary btn-sm'>Edit</a>
+                        <a href='edit_order.php?id=" . htmlspecialchars($row['order_id']) . "&delete=1' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                    </td>
                   </tr>";
         }
         echo "</tbody></table>";

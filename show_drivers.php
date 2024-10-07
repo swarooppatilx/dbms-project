@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show Drivers</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <div class="container mt-5">
@@ -27,6 +21,7 @@
                       <th>Phone</th>
                       <th>Location</th>
                       <th>Email</th>
+                      <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>";
@@ -35,10 +30,14 @@
         while ($row = $result->fetch_assoc()) {
             echo "<tr>
                     <td>" . $row['driver_id'] . "</td>
-                    <td>" . $row['name'] . "</td>
-                    <td>" . $row['phone'] . "</td>
-                    <td>" . $row['location'] . "</td>
-                    <td>" . $row['email'] . "</td>
+                    <td>" . htmlspecialchars($row['name']) . "</td>
+                    <td>" . htmlspecialchars($row['phone']) . "</td>
+                    <td>" . htmlspecialchars($row['location']) . "</td>
+                    <td>" . htmlspecialchars($row['email']) . "</td>
+                    <td>
+                        <a href='edit_driver.php?id=" . $row['driver_id'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                        <a href='edit_driver.php?id=" . $row['driver_id'] . "&delete=1' class='btn btn-danger btn-sm' onclick=\"return confirm('Are you sure you want to delete this driver?');\">Delete</a>
+                    </td>
                   </tr>";
         }
         echo "</tbody></table>";

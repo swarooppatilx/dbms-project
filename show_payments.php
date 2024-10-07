@@ -10,13 +10,7 @@ $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payments</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <div class="container mt-5">
@@ -34,6 +28,7 @@ $result = $conn->query($sql);
                     <th>Payment Method</th>
                     <th>Amount</th>
                     <th>Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>";
@@ -48,6 +43,10 @@ $result = $conn->query($sql);
                     <td>" . htmlspecialchars($row['payment_method']) . "</td>
                     <td>" . number_format($row['amount'], 2) . "</td>
                     <td>" . htmlspecialchars($row['status']) . "</td>
+                    <td>
+                        <a href='edit_payment.php?payment_id=" . $row['payment_id'] . "' class='btn btn-primary btn-sm'>Edit</a>
+                        <a href='edit_payment.php?payment_id=" . $row['payment_id'] . "&delete=1' class='btn btn-danger btn-sm'>Delete</a>
+                    </td>
                   </tr>";
         }
         echo "</tbody></table>";

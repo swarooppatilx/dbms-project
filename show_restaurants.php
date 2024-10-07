@@ -5,13 +5,7 @@ $result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurants</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <div class="container mt-5">
@@ -26,6 +20,7 @@ $result = $conn->query($sql);
                     <th>Name</th>
                     <th>Address</th>
                     <th>Phone</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>";
@@ -37,6 +32,10 @@ $result = $conn->query($sql);
                     <td>" . htmlspecialchars($row['name']) . "</td>
                     <td>" . htmlspecialchars($row['address']) . "</td>
                     <td>" . htmlspecialchars($row['phone']) . "</td>
+                    <td>
+                        <a href='edit_restaurant.php?restaurant_id=" . $row['restaurant_id'] . "' class='btn btn-warning btn-sm'>Edit</a>
+                        <a href='edit_restaurant.php?restaurant_id=" . $row['restaurant_id'] . "&delete=1' class='btn btn-danger btn-sm'>Delete</a>
+                    </td>
                   </tr>";
         }
         echo "</tbody></table>";

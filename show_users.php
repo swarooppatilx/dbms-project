@@ -2,13 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Users List</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
+<?php include('header.php'); ?>
 <body>
 
 <div class="container mt-5">
@@ -21,6 +15,7 @@
           <th>Name</th>
           <th>Email</th>
           <th>Phone</th>
+          <th>Actions</th> <!-- New column for actions -->
         </tr>
       </thead>
       <tbody>
@@ -35,10 +30,14 @@
                     <td>" . htmlspecialchars($row["name"]) . "</td>
                     <td>" . htmlspecialchars($row["email"]) . "</td>
                     <td>" . htmlspecialchars($row["phone"]) . "</td>
+                    <td>
+                      <a href='edit_user.php?id=" . htmlspecialchars($row["user_id"]) . "' class='btn btn-primary btn-sm'>Edit</a>
+                      <a href='edit_user.php?id=" . htmlspecialchars($row["user_id"]) . "&delete=1' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                    </td>
                   </tr>";
           }
         } else {
-          echo "<tr><td colspan='4' class='text-center'>No users found</td></tr>";
+          echo "<tr><td colspan='5' class='text-center'>No users found</td></tr>";
         }
         ?>
       </tbody>
