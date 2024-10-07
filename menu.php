@@ -21,6 +21,7 @@
             <input type="number" step="0.01" name="price" class="form-control" id="price" placeholder="Price" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Add Menu Item</button>
+        <a href="show_menu.php" class="btn btn-secondary">Show Menu</a>
     </form>
 
     <?php

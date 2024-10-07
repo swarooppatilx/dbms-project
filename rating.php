@@ -21,6 +21,7 @@
             <input type="number" name="rating" class="form-control" id="rating" min="1" max="5" placeholder="Rating (1-5)" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Submit Rating</button>
+        <a href="show_rating.php" class="btn btn-secondary">Show Ratings</a>
     </form>
 
     <?php

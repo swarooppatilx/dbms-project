@@ -25,6 +25,7 @@
             <input type="text" name="status" class="form-control" id="status" placeholder="Payment Status" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Record Payment</button>
+        <a href="show_payments.php" class="btn btn-secondary">Show Payments</a>
     </form>
 
     <?php

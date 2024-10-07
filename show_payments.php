@@ -1,10 +1,20 @@
 <?php include('db.php'); 
 
 $sql = "
-    SELECT Payment.payment_id, Payment.payment_method, Payment.amount, Payment.status, Orders.order_id, Orders.user_id, Orders.restaurant_id 
+    SELECT 
+        Payment.payment_id, 
+        Payment.payment_method, 
+        Payment.amount, 
+        Payment.status, 
+        Orders.order_id, 
+        Users.name AS user_name, 
+        Restaurants.name AS restaurant_name
     FROM Payment
     JOIN Orders ON Payment.order_id = Orders.order_id
+    JOIN Users ON Orders.user_id = Users.user_id
+    JOIN Restaurants ON Orders.restaurant_id = Restaurants.restaurant_id
 ";
+
 $result = $conn->query($sql);
 
 ?>
@@ -23,8 +33,8 @@ $result = $conn->query($sql);
                   <tr>
                     <th>Payment ID</th>
                     <th>Order ID</th>
-                    <th>User ID</th>
-                    <th>Restaurant ID</th>
+                    <th>User Name</th>
+                    <th>Restaurant Name</th>
                     <th>Payment Method</th>
                     <th>Amount</th>
                     <th>Status</th>
@@ -38,8 +48,8 @@ $result = $conn->query($sql);
             echo "<tr>
                     <td>" . $row['payment_id'] . "</td>
                     <td>" . $row['order_id'] . "</td>
-                    <td>" . $row['user_id'] . "</td>
-                    <td>" . $row['restaurant_id'] . "</td>
+                    <td>" . htmlspecialchars($row['user_name']) . "</td>
+                    <td>" . htmlspecialchars($row['restaurant_name']) . "</td>
                     <td>" . htmlspecialchars($row['payment_method']) . "</td>
                     <td>" . number_format($row['amount'], 2) . "</td>
                     <td>" . htmlspecialchars($row['status']) . "</td>
@@ -49,7 +59,7 @@ $result = $conn->query($sql);
                     </td>
                   </tr>";
         }
-        echo "</tbody></table>";
+        echo "</tbody></table><a href='index.php' class='btn btn-secondary'>Back</a>";
     } else {
         echo "<div class='alert alert-warning' role='alert'>No payments found.</div>";
     }

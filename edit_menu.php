@@ -19,9 +19,16 @@ if (isset($_GET['id'])) {
 
     // Handle form submission for updating menu item details
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $restaurant_id = $conn->real_escape_string($_POST['restaurant_id']);
         $item_name = $conn->real_escape_string($_POST['item_name']);
         $price = $conn->real_escape_string($_POST['price']);
+
+        // Fetch the restaurant_id from the URL
+        if (isset($_GET['restaurant_id'])) {
+            $restaurant_id = intval($_GET['restaurant_id']);
+        } else {
+            echo "Restaurant ID not provided.";
+            exit;
+        }
 
         $sql = "UPDATE Menu SET restaurant_id = '$restaurant_id', item_name = '$item_name', price = '$price' WHERE menu_id = $menu_id";
         if ($conn->query($sql) === TRUE) {
@@ -54,11 +61,8 @@ if (isset($_GET['id'])) {
 <body>
 <div class="container mt-5">
     <h2>Edit Menu Item</h2>
-    <form action="edit_menu.php?id=<?php echo $menu_id; ?>" method="POST">
-        <div class="mb-3">
-            <label for="restaurant_id" class="form-label">Restaurant ID</label>
-            <input type="number" class="form-control" id="restaurant_id" name="restaurant_id" value="<?php echo htmlspecialchars($menu_item['restaurant_id']); ?>" required>
-        </div>
+    <!-- Form for editing menu item details -->
+    <form action="edit_menu.php?id=<?php echo $menu_id; ?>&restaurant_id=<?php echo intval($_GET['restaurant_id']); ?>" method="POST">
         <div class="mb-3">
             <label for="item_name" class="form-label">Item Name</label>
             <input type="text" class="form-control" id="item_name" name="item_name" value="<?php echo htmlspecialchars($menu_item['item_name']); ?>" required>

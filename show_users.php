@@ -42,6 +42,7 @@
         ?>
       </tbody>
     </table>
+    <a href='index.php' class='btn btn-secondary'>Back</a>
 </div>
 
 <!-- Bootstrap JS (optional for additional features) -->

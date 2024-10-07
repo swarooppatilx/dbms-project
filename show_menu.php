@@ -38,12 +38,12 @@ $result = $conn->query($sql);
                     <td>" . number_format($row['price'], 2) . "</td>
                     <td>" . htmlspecialchars($row['restaurant_name']) . "</td>
                     <td>
-                        <a href='edit_menu_item.php?id=" . htmlspecialchars($row['menu_id']) . "' class='btn btn-primary btn-sm'>Edit</a>
-                        <a href='edit_menu_item.php?id=" . htmlspecialchars($row['menu_id']) . "&delete=1' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\")'>Delete</a>
+                        <a href='edit_menu.php?id=" . htmlspecialchars($row['menu_id']) . "' class='btn btn-primary btn-sm'>Edit</a>
+                        <a href='edit_menu.php?id=" . htmlspecialchars($row['menu_id']) . "&delete=1' class='btn btn-danger btn-sm' onclick='return confirm(\"Are you sure?\")'>Delete</a>
                     </td>
                   </tr>";
         }
-        echo "</tbody></table>";
+        echo "</tbody></table><a href='index.php' class='btn btn-secondary'>Back</a>";
     } else {
         echo "<div class='alert alert-warning' role='alert'>No menu items found.</div>";
     }

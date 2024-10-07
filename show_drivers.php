@@ -40,7 +40,7 @@
                     </td>
                   </tr>";
         }
-        echo "</tbody></table>";
+        echo "</tbody></table><a href='index.php' class='btn btn-secondary'>Back</a>";
     } else {
         echo "<div class='alert alert-warning' role='alert'>No drivers found.</div>";
     }

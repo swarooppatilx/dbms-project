@@ -25,6 +25,7 @@
             <input type="text" name="delivery_status" class="form-control" id="delivery_status" placeholder="Delivery Status" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Place Order</button>
+        <a href="show_orders.php" class="btn btn-secondary">Show Orders</a>
     </form>
 
     <?php

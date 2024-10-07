@@ -21,6 +21,7 @@
             <input type="text" name="phone" class="form-control" id="phone" placeholder="Phone" required>
         </div>
         <button type="submit" name="submit" class="btn btn-primary">Add Restaurant</button>
+        <a href="show_restaurants.php" class="btn btn-secondary">Show Restaurants</a>
     </form>
 
     <?php
